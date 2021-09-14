@@ -228,6 +228,9 @@ button.meetingbtn {
 hr {
   margin-bottom: 40px;
 }
+.content:last-child hr {
+  display: none;
+}
 .username {
   font-weight: bold;
 }

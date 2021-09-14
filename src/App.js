@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import UserList from './UserList';
  
-const url = 'https://randomuser.me/api/?results=5'
+const url = 'https://randomuser.me/api/?results=10'
  
 function App() {
  const [loading, setLoading] = useState(false)
  const [isHidden, setIsHidden] = useState(true)
  const [randomUsers, setRandomUsers] = useState([]);
+ const [dataLength, setDataLength] = useState(0);
   
- const handleClick = () => {
+ const handleClick = (e) => {
   //  setIsHidden(!isHidden);
   //  if(randomUsers.length === 0) {
   //    getData();
   //  }
-  console.log(randomUsers.length)
+  e.preventDefault();
+  getData();
  }
 
 // async function getData() {
@@ -26,21 +28,23 @@ function App() {
 //  }
 // }
 const getData = () => {
-  fetch('https://randomuser.me/api/?results=5')
+  fetch(url)
   .then(response => response.json())
   .then(response  => setRandomUsers(response.results))
+  .then(response  => setDataLength(randomUsers.length))
   .catch(error => console.log(error))
   
-  if(randomUsers.length > 0) {setIsHidden(!isHidden)}
+  if(randomUsers.length > 0) {
+    setIsHidden(!isHidden)}
  }
  
  useEffect(() => {
-  if(randomUsers.length < 1) {
-    getData()
-  }
-
+  // if(randomUsers.length < 1) {
+  //   getData()
+  // }
+  getData();
  }, []);
- 
+
  if(loading) {
    return (
      <main>
@@ -60,13 +64,15 @@ const getData = () => {
 //  }
  var today = new Date(),
  date = (today.getMonth() + 1) + '-' + today.getDate() + '-' + today.getFullYear();
+ const lastIndex = dataLength - 1;
  return(
    <main>
      <section className="container">
       <h3>Hello today is {date}</h3>
-      <button className="meetingbtn" onClick={(e) => getData(e)}>Meetings</button>
+      <button className="meetingbtn" onClick={handleClick}>Meetings</button>
         <div className="userProfile" style={{display: isHidden  ? 'none' : 'block'}}>
-          <UserList users={randomUsers} />
+          <p>You have {dataLength} meetings today.</p>
+          <UserList users={randomUsers} lastIndex={lastIndex}/>
         </div>
      </section>
    </main>
