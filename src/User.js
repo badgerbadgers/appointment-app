@@ -23,7 +23,6 @@ const handleClick = () => {
            <img src={data.user.picture.large} alt={data.user.name.first} />
            <h3 className="person-h3"><span className="username">{data.user.name.first} {data.user.name.last}</span> {times[data.index]} </h3>
            <button onClick={() => handleClick()}>Delete</button>
-           <input type="text" name="notes" placeholder="notes" />
            {/* find a way hide the line on the final user that is being shown */}
            <hr style={{display: data.index === data.lastIndex ? 'none' : 'block'}} />
        </div>
