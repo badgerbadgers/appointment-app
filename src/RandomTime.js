@@ -1,6 +1,3 @@
-
-import React from 'react';
-
 function RandomTime() {
     let hrs = Math.round(Math.random() * 24);
     let mins = Math.round(Math.random() * 60);    
