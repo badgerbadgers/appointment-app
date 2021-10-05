@@ -14,7 +14,7 @@ let times = (data.time)
 //when you click the button it should delete that corresponding user
 const handleClick = () => {
     setIsHidden(!isHidden);
-    data.updateMeetings();
+    data.updateMeetings(data.index);
   }
    
    //the User component should return a div with an image, name, button and a line
@@ -24,7 +24,7 @@ const handleClick = () => {
            <h3 className="person-h3"><span className="username">{data.user.name.first} {data.user.name.last}</span> {times[data.index]} </h3>
            <button onClick={() => handleClick()}>Delete</button>
            {/* find a way hide the line on the final user that is being shown */}
-           <hr style={{display: data.index === data.lastIndex ? 'none' : 'block'}} />
+           <hr style={{display: data.index === data.users.length -1  ? 'none' : 'block'}} />
        </div>
    )
 }

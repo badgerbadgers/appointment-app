@@ -62,13 +62,17 @@ function UserList(data) {
    return(
      <>
      {/* loop through the data and create new component */}
-       {data.users.map((user,i) => {
+       {
+         data.users
+          .map((user, i) => {
            return(
             // add the following properties to the new component: key, the entire object with all of its' 
             // key value pairs, an index and any other properties passed down from main app and UserList 
             // component
              <div key={user.login.uuid}>
-             <User user={user} index={i} lastIndex={data.lastIndex} time={sortedTime} updateMeetings={data.updateMeetings} />
+             <User users={data.users} user={user} index={i} time={sortedTime} isCompleted={false} 
+             updateMeetings={data.updateMeetings} 
+             />
              </div>
              )
            })
