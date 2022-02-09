@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import RandomTime from './RandomTime';
+import React, { useEffect } from 'react';
 
 /*User Component
 [x] the User component should return a div with an image, name, button and a line
@@ -7,25 +6,26 @@ import RandomTime from './RandomTime';
 [x] when you click the button it should delete that corresponding user
 */
 const User = (data) => {
-const [isHidden, setIsHidden] = useState(false);
-const [isLastItem, setIsLastItem] = useState(false);
+// let isDeleted = data.isDeleted
+// let setIsDeleted = data.setIsDeleted
+// const [isLastItem, setIsLastItem] = useState(false);
 let times = (data.time)
 
 //when you click the button it should delete that corresponding user
-const handleClick = () => {
-    setIsHidden(!isHidden);
-    data.updateMeetings(data.index);
+const handleClick = (user, index) => {
+    data.deleteMeetings(user, index);
   }
-   
+
    //the User component should return a div with an image, name, button and a line
    return(
-       <div style={{display: isHidden  ? 'none' : 'block'}}>
-           <img src={data.user.picture.large} alt={data.user.name.first} />
-           <h3 className="person-h3"><span className="username">{data.user.name.first} {data.user.name.last}</span> {times[data.index]} </h3>
-           <button onClick={() => handleClick()}>Delete</button>
-           {/* find a way hide the line on the final user that is being shown */}
-           <hr style={{display: data.index === data.users.length -1  ? 'none' : 'block'}} />
-       </div>
+         <div>
+             <img src={data.user.picture.large} alt={data.user.name.first} />
+             <h3 className="person-h3"><span className="username">{data.user.name.first} {data.user.name.last}</span> {times[data.index]} </h3>
+             {/* find a way hide the line on the final user that is being shown */}
+             <button onClick={() => handleClick(data.user)}>Delete</button>
+             {data.index === data.users.length - 1 ? null: <hr />}
+         </div>
+ 
    )
 }
  

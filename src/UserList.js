@@ -17,7 +17,6 @@ import User from './User';
 //get data passed down from main 'App' component
 function UserList(data) {
   const [sortedTime, setSortedTime] = useState([]);
-
   //generate a random time in 12 hour format
   function RandomTime() {
     let hrs = Math.round(Math.random() * 24);
@@ -61,19 +60,20 @@ function UserList(data) {
 
    return(
      <>
+     <h3>Your Meetings:</h3>
      {/* loop through the data and create new component */}
        {
-         data.users
-          .map((user, i) => {
+        data.users.map((user, index) => {
            return(
+            
             // add the following properties to the new component: key, the entire object with all of its' 
             // key value pairs, an index and any other properties passed down from main app and UserList 
-            // component
-             <div key={user.login.uuid}>
-             <User users={data.users} user={user} index={i} time={sortedTime} isCompleted={false} 
-             updateMeetings={data.updateMeetings} 
+            // component 
+            <div key={user.login.uuid}>
+              <User key={user.login.uuid} users={data.users} user={user} index={index} 
+              time={sortedTime} deleteMeetings={data.deleteMeetings} totalMeetings={data.totalMeetings}
              />
-             </div>
+            </div>          
              )
            })
          }
