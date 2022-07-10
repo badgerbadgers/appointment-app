@@ -93,23 +93,11 @@ function addDeletedMeetings(user, index) {
   //update text on dom to add total meetings by 1
   setTotalMeetings(totalMeetings + 1)
  }
- 
- 
-//AXIOS METHOD TO GET API DATA
-// async function getData() {
-//  try {
-//    const { data } = await axios.get(url)
-//    setcurrentMeetings(data.results)
-//  }
-//  catch(error) {
-//    console.log(error)
-//  }
-// }
- 
+  
 useEffect(() => {
   setTotalMeetings(getRandomInt(1, MAX_MEETINGS))
   getData();
-}, []);
+}, [deleteMeetings, currentMeetings]);
 return(
   <main>
     <section className="container">
